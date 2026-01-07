@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "../Styles/Testemonials.module.css";
+import styles from "../styles/Testemonials.module.css";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
