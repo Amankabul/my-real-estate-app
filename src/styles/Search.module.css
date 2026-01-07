@@ -1,0 +1,356 @@
+.page {
+  min-height: 100vh;
+  background: #f6f7f9;
+  color: #0f172a;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+  background: #ffffff;
+  border-bottom: 1px solid #e7e9ee;
+}
+
+.headerInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 17rem;
+  height: 5rem;
+  object-fit: contain;
+  display: block;
+}
+
+.nav {
+  display: flex;
+  gap: 3rem;
+}
+
+.navLink {
+  color: #0f172a;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.navLink:hover {
+  color: blue;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+.top {
+  background: #ffffff;
+  border-bottom: 1px solid #eef1f5;
+}
+
+.topInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.bookmarkBtn {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+  font-size: 1.8rem;
+  display: grid;
+  place-items: center;
+}
+.save_bookmark {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+.bookmarkBtn:hover {
+  background: white;
+}
+.title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+}
+
+.quote {
+  font-weight: 500;
+  color: #1e74ff;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* =========================
+   MAIN
+========================= */
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px 18px 40px;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+.empty {
+  display: grid;
+  place-items: center;
+  padding: 56px 0;
+}
+
+.emptyCard {
+  width: min(520px, 100%);
+  background: #ffffff;
+  border: 1px solid #e8ebf2;
+  border-radius: 18px;
+  padding: 26px 22px;
+  text-align: center;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+}
+
+.emptyIconBox {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 12px;
+  border-radius: 16px;
+  background: #e9edf5;
+  display: grid;
+  place-items: center;
+}
+
+.emptyTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.emptyText {
+  margin: 8px 0 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* =========================
+   GRID
+========================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+/* =========================
+   CARD
+========================= */
+.card {
+  background: #ffffff;
+  border: 1px solid #e8ebf2;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+/* =========================
+   IMAGE
+========================= */
+.imageWrap {
+  position: relative;
+  height: 175px;
+  background: #e9edf5;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.placeholderText {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 650;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.noImage {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* Badge */
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 8px;
+  background: rgba(17, 24, 39, 0.86);
+  color: #ffffff;
+}
+
+/* =========================
+   SAVE BUTTON
+========================= */
+.saveBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(15, 23, 42, 0.35);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.saveBtn:hover {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.saveIconBox {
+  width: 18px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 6px;
+}
+
+.content {
+  padding: 14px 14px 16px;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0rem;
+  color: #1e74ff;
+}
+
+.address {
+  margin: 0.6rem 0 1.4rem;
+  font-size: 1.5rem;
+  color: #6a707a;
+}
+
+.location {
+  font-size: 12.5px;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #eef1f5;
+  margin-bottom: 12px;
+}
+.meta {
+  display: flex;
+  gap: 2rem;
+}
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-weight: 500;
+  color: #6a707a;
+}
+.icons {
+  height: 1.5rem;
+  width: 1.6rem;
+}
+.metaText {
+  font-size: 18.5px;
+  color: #334155;
+  font-weight: 650;
+}
+
+.detailsBtn {
+  width: 100%;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid #3b82f6;
+  background: #ffffff;
+  color: #1e74ff;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.detailsBtn:hover {
+  background: rgba(30, 116, 255, 0.07);
+}
+
+.footer {
+  text-align: center;
+  padding: 16px 18px 28px;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+/* =========================
+   SPINNER
+========================= */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 850px) {
+  .topInner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

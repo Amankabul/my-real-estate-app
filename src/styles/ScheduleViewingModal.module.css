@@ -1,0 +1,468 @@
+.overlay {
+  /* ✅ allow scrolling when modal is taller than screen */
+
+  /* ✅ don't lock to perfect center (center blocks scroll on small screens) */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 24px 18px;
+}
+
+.modal {
+  width: min(1100px, 96vw);
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+
+  /* ✅ keep modal inside viewport */
+  min-height: 100vh;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 22px 22px 14px;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.close {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 0;
+  color: #6b7280;
+}
+
+.close:hover {
+  color: #111827;
+  border-color: #d1d5db;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr;
+
+  /* ✅ content area scrolls if too tall */
+  overflow: auto;
+
+  /* ✅ important so grid children can shrink/scroll */
+  min-height: 0;
+
+  /* keep your original base height feeling */
+  min-height: 560px;
+}
+
+.left {
+  padding: 18px 22px 22px;
+
+  /* ✅ allow internal scroll in grid layout */
+  min-height: 0;
+}
+
+.right {
+  padding: 18px 22px 22px;
+  border-left: 1px solid #eef2f7;
+  background: #fbfdff;
+
+  /* ✅ allow internal scroll in grid layout */
+  min-height: 0;
+}
+
+.block {
+  padding: 12px 0 18px;
+}
+
+.blockLabel {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Calendar */
+.calendar {
+  width: 100%;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+  color: #9ca3af;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.weekdays span {
+  text-align: center;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.day {
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 700;
+  color: #111827;
+}
+
+.day:hover {
+  background: #f3f4f6;
+}
+
+.muted {
+  color: #cbd5e1;
+}
+
+.soft {
+  background: #e8f1ff;
+  color: #1677ff;
+}
+
+.selected {
+  background: #1677ff;
+  color: #fff;
+}
+
+.disabled {
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+/* Times */
+.times {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.time {
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  color: #111827;
+}
+
+.time:hover {
+  border-color: #9ca3af;
+}
+
+.timeSelected {
+  border-color: #1677ff;
+  color: #1677ff;
+  box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.12);
+}
+
+.timeDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.confirmRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.confirmBtn {
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: 0;
+  background: #1677ff;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 220px;
+}
+
+.confirmBtn:hover {
+  filter: brightness(0.98);
+}
+
+/* Right side summary + form */
+.smallMuted {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.propTitle {
+  margin-top: 6px;
+  font-size: 18px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.propAddress {
+  margin-top: 4px;
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.summary {
+  padding-bottom: 16px;
+}
+
+.form {
+  display: grid;
+  gap: 14px;
+  padding: 14px 0 16px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.input {
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  padding: 0 12px;
+  outline: none;
+  font-size: 14px;
+  background: #fff;
+}
+
+.input:focus {
+  border-color: #1677ff;
+  box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.12);
+}
+
+.textarea {
+  min-height: 120px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  padding: 12px;
+  outline: none;
+  font-size: 14px;
+  resize: vertical;
+  background: #fff;
+}
+
+.textarea:focus {
+  border-color: #1677ff;
+  box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.12);
+}
+
+/* Agent */
+.agent {
+  border-top: 1px solid #eef2f7;
+  padding-top: 16px;
+  margin-top: 8px;
+}
+.timeSelected {
+  border-color: #1677ff;
+  color: #1677ff;
+  box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.12);
+}
+
+.agentTitle {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 900;
+  color: #111827;
+}
+/* =========================
+   React Calendar overrides
+   (ONLY calendar styling)
+   ========================= */
+
+.calendarWrap {
+  width: 100%;
+}
+
+/* base */
+.calendarWrap :global(.react-calendar) {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+}
+
+/* navigation */
+.calendarWrap :global(.react-calendar__navigation) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.calendarWrap :global(.react-calendar__navigation button) {
+  min-width: 44px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 800;
+  color: #111827;
+}
+
+.calendarWrap :global(.react-calendar__navigation__label) {
+  flex: 1;
+  border: 0 !important;
+  background: transparent !important;
+  font-weight: 900;
+  color: #111827;
+}
+
+/* weekdays */
+.calendarWrap :global(.react-calendar__month-view__weekdays) {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #9ca3af;
+  margin-bottom: 10px;
+}
+
+.calendarWrap :global(.react-calendar__month-view__weekdays abbr) {
+  text-decoration: none;
+}
+
+/* ✅ IMPORTANT: react-calendar days layout is flex, so we force grid like your design */
+.calendarWrap :global(.react-calendar__month-view__days) {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  gap: 10px !important;
+}
+
+/* day tile = your .day */
+.calendarWrap :global(.react-calendar__tile) {
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* hover */
+.calendarWrap :global(.react-calendar__tile:hover) {
+  background: #f3f4f6;
+}
+
+/* muted other month = your .muted */
+.calendarWrap
+  :global(.react-calendar__month-view__days__day--neighboringMonth) {
+  color: #cbd5e1;
+}
+
+/* disabled */
+.calendarWrap :global(.react-calendar__tile:disabled) {
+  color: #cbd5e1;
+  cursor: not-allowed;
+  background: transparent;
+}
+
+/* today = your .soft */
+.calendarWrap :global(.react-calendar__tile--now) {
+  background: #e8f1ff;
+  color: #1677ff;
+}
+
+/* selected = your .selected */
+.calendarWrap :global(.react-calendar__tile--active) {
+  background: #1677ff;
+  color: #fff;
+}
+
+.agentRow {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  border: 1px solid #bfdbfe;
+  background: linear-gradient(180deg, #dbeafe, #eff6ff);
+}
+
+.agentName {
+  font-weight: 900;
+  color: #111827;
+  line-height: 1.15;
+}
+
+.agentOrg {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.agentInfo {
+  min-width: 0;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .right {
+    border-left: 0;
+    border-top: 1px solid #eef2f7;
+  }
+
+  .confirmRow {
+    justify-content: stretch;
+  }
+
+  .confirmBtn {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .times {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .title {
+    font-size: 22px;
+  }
+}

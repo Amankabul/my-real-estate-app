@@ -1,0 +1,160 @@
+.section {
+  width: 100%;
+  background: #ffffff;
+  padding: 40px 0 80px;
+}
+
+.container {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+
+.backBtn {
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  background: #fff;
+  color: #111827;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.backBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(17, 24, 39, 0.08);
+}
+
+.header {
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #111827;
+  background: rgba(55, 73, 212, 0.08);
+  border: 1px solid rgba(55, 73, 212, 0.12);
+}
+
+.title {
+  margin: 12px 0 10px;
+  font-size: clamp(28px, 3.4vw, 42px);
+  line-height: 1.1;
+  color: #0f172a;
+}
+
+.lead {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(15, 23, 42, 0.78);
+  max-width: 72ch;
+}
+
+.heroWrap {
+  margin-top: 18px;
+  border-radius: 22px;
+  overflow: hidden;
+
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  box-shadow: 0 18px 50px rgba(17, 24, 39, 0.08);
+}
+.contentFull {
+  margin-top: 22px;
+  width: 100%;
+  max-width: none; /* ✅ this makes it full width */
+}
+
+.heroImage {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.content {
+  margin-top: 22px;
+  max-width: 80ch;
+}
+
+.paragraph {
+  margin: 0 0 14px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(15, 23, 42, 0.86);
+}
+
+.gallery {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.galleryItem {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  box-shadow: 0 14px 35px rgba(17, 24, 39, 0.06);
+}
+
+.galleryImg {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+
+.notFoundBox {
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  background: rgba(17, 24, 39, 0.02);
+  max-width: 640px;
+}
+
+.notFoundTitle {
+  margin: 0 0 8px;
+  font-size: 22px;
+  color: #0f172a;
+}
+
+.notFoundText {
+  margin: 0 0 14px;
+  color: rgba(15, 23, 42, 0.75);
+  line-height: 1.6;
+}
+
+.primaryBtn {
+  border: none;
+  background: #3749d4;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primaryBtn:hover {
+  filter: brightness(0.95);
+}
+
+@media (max-width: 720px) {
+  .heroImage {
+    height: 260px;
+  }
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+  .galleryImg {
+    height: 220px;
+  }
+}

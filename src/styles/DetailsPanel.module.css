@@ -1,0 +1,348 @@
+.section {
+  width: 100%;
+  background: #fff;
+}
+
+.container {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  padding: 20px 0 80px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 28px;
+  align-items: start;
+}
+
+.left {
+  min-width: 0;
+}
+
+/* ===== Top stats ===== */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.iconBox {
+  width: 20px;
+  height: 20px;
+  padding: 0.5rem;
+  border-radius: 7px;
+  border: 1px solid #bfdbfe;
+  background: linear-gradient(180deg, #dbeafe, #eff6ff);
+  flex: 0 0 auto;
+}
+
+.statText {
+  min-width: 0;
+}
+
+.statValue {
+  font-size: 14px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.15;
+}
+
+.statLabel {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== Tabs ===== */
+.tabs {
+  display: flex;
+  gap: 24px;
+  margin-top: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab {
+  border: 0;
+  background: transparent;
+  padding: 12px 2px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #6b7280;
+  position: relative;
+}
+
+.tab:hover {
+  color: #111827;
+}
+
+.activeTab {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.activeTab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: #2563eb;
+  border-radius: 2px;
+}
+
+/* ===== Content ===== */
+.content {
+  padding-top: 18px;
+}
+
+.panel {
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+  height: auto;
+  pointer-events: auto;
+}
+
+.hide {
+  opacity: 0;
+  transform: translateY(6px);
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.p {
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #374151;
+}
+
+.p:last-child {
+  margin-bottom: 0;
+}
+
+/* Floor plans placeholder */
+.placeholder {
+  border: 1px dashed #d1d5db;
+  background: #f9fafb;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.placeholderTitle {
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.placeholderSub {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Map box */
+.mapBox {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.mapHead {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mapTitle {
+  font-weight: 800;
+  color: #111827;
+}
+
+.mapSub {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.mapBody {
+  height: 320px;
+  background: #f3f4f6;
+  display: grid;
+  place-items: center;
+}
+
+.mapFake {
+  width: min(520px, 92%);
+  height: 78%;
+  border-radius: 16px;
+  border: 1px solid #d1d5db;
+  background: linear-gradient(135deg, #e5e7eb, #f9fafb);
+  display: grid;
+  place-items: center;
+  color: #6b7280;
+  font-weight: 700;
+}
+
+/* ===== Right card ===== */
+.right {
+  position: relative;
+}
+
+.card {
+  position: sticky;
+  top: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(17, 24, 39, 0.06);
+}
+
+.cardTop {
+  padding: 16px 16px 12px;
+}
+
+.priceLabel {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.priceValue {
+  font-size: 30px;
+  font-weight: 500;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+
+.cardActions {
+  padding: 0 16px 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  width: 100%;
+  border-radius: 10px;
+  padding: 11px 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.primaryBtn {
+  background: #1677ff;
+  color: #fff;
+}
+
+.secondaryBtn {
+  background: #e8f1ff;
+  color: #0b5bd3;
+  border-color: #cfe2ff;
+}
+
+.divider {
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.agent {
+  padding: 14px 16px 16px;
+}
+
+.agentLabel {
+  font-size: 13px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.agentRow {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid #bfdbfe;
+  background: linear-gradient(180deg, #dbeafe, #eff6ff);
+}
+
+.agentInfo {
+  min-width: 0;
+}
+
+.agentName {
+  font-weight: 900;
+  color: #111827;
+  line-height: 1.15;
+}
+
+.agentOrg {
+  margin-top: 3px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.profileBtn {
+  margin-top: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 800;
+  color: #1677ff;
+  cursor: pointer;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 980px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    position: static;
+  }
+
+  .statsRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .tabs {
+    gap: 14px;
+  }
+
+  .priceValue {
+    font-size: 24px;
+  }
+
+  .mapBody {
+    height: 260px;
+  }
+}

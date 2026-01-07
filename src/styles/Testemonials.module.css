@@ -1,0 +1,212 @@
+.section {
+  padding: 5rem 6vw 4.5rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  margin-top: 10rem;
+}
+
+.sectionVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.kicker {
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  margin: 0 0 1.2rem;
+
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition-delay: 0.08s;
+}
+
+.sectionVisible .kicker {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heading {
+  margin: 0;
+  font-size: 2.8rem;
+  line-height: 1.2;
+  font-weight: 500;
+  color: #18181b;
+
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition-delay: 0.18s;
+}
+
+.sectionVisible .heading {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.highlight {
+  color: #5387e1;
+}
+
+.slider {
+  margin-top: 3.2rem;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition-delay: 0.3s;
+}
+
+.sectionVisible .slider {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slider :global(.swiper-pagination) {
+  position: static;
+  margin-top: 2.3rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.slider :global(.swiper-pagination-bullet) {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: #e4e4e7;
+  opacity: 1;
+  transition: width 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+
+.slider :global(.swiper-pagination-bullet-active) {
+  width: 18px;
+  background: #6483d2;
+  transform: translateY(-1px);
+}
+
+.slide {
+  height: 100%;
+  display: flex;
+}
+
+.card {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 1.6rem;
+  padding: 2rem 2.2rem 1.9rem;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #18181b;
+}
+
+.location {
+  margin: 0.1rem 0 0;
+  font-size: 1.1rem;
+  color: #a1a1aa;
+}
+
+.quoteIcon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.text {
+  margin: 2rem 0 1.6rem;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: #52525b;
+}
+
+.cardFooter {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #f4f4f5;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.ratingsLabel {
+  font-size: 1.2rem;
+  color: #a1a1aa;
+}
+
+.ratingValue {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #18181b;
+}
+
+.stars {
+  display: inline-flex;
+  gap: 0.15rem;
+}
+
+.starIcon {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 1024px) {
+  .heading {
+    font-size: 2.3rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding-inline: 1.5rem;
+  }
+
+  .card {
+    padding: 1.8rem 1.9rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .heading {
+    font-size: 1.9rem;
+  }
+}

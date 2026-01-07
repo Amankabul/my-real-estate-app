@@ -1,0 +1,169 @@
+.overlay {
+  inset: 0;
+  background: rgba(17, 24, 39, 0.45);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  z-index: 9999;
+}
+
+.card {
+  width: min(460px, 100%);
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+  padding: 22px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.close {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+.close:hover {
+  color: #111827;
+}
+
+/* Agent */
+.agent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #dbeafe, #eff6ff);
+  border: 1px solid #bfdbfe;
+}
+
+.agentName {
+  font-weight: 800;
+  color: #111827;
+}
+
+.agentOrg {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 18px 0;
+}
+
+/* Form */
+.form {
+  display: grid;
+  gap: 14px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #374151;
+}
+
+.input {
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  padding: 0 12px;
+  font-size: 14px;
+}
+
+.textarea {
+  min-height: 120px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  padding: 12px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #1677ff;
+  box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.12);
+}
+
+/* Checkbox */
+.checkbox {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 13px;
+  color: #374151;
+}
+
+.checkbox small {
+  display: block;
+  margin-top: 2px;
+  color: #6b7280;
+}
+
+/* Button */
+.submit {
+  margin-top: 10px;
+  height: 48px;
+  border-radius: 12px;
+  border: 0;
+  background: #1677ff;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submit:hover {
+  filter: brightness(0.97);
+}
+
+/* Responsive */
+@media (max-width: 420px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

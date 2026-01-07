@@ -1,0 +1,152 @@
+.section {
+  background: #ffffff;
+  padding: 7rem 4rem;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 3.6rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+}
+
+.subtitle {
+  margin-top: 1.2rem;
+  font-size: 1.5rem;
+  color: #64748b;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  gap: 3rem;
+  border-bottom: 1px solid #e6eaf1;
+  margin-bottom: 3rem;
+}
+
+.tabBtn {
+  padding: 1.2rem 0;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  position: relative;
+}
+
+.activeTab {
+  color: #1d7af3;
+}
+
+.activeTab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 3px;
+  background: #1d7af3;
+  border-radius: 2px;
+}
+
+/* FAQ LIST */
+.faqList {
+  border-top: 1px solid #e6eaf1;
+}
+
+.faqItem {
+  border-bottom: 1px solid #e6eaf1;
+}
+
+.question {
+  width: 100%;
+  padding: 2.2rem 0;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: #0f172a;
+  cursor: pointer;
+  text-align: left;
+}
+
+.arrow {
+  font-size: 2rem;
+  transition: transform 0.25s ease;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.answer {
+  padding: 0 0 2.2rem;
+  font-size: 1.5rem;
+  line-height: 1.7;
+  color: #5c7ca9;
+}
+
+/* CTA */
+.cta {
+  margin-top: 5rem;
+  padding: 3.5rem;
+  background: #f8fafc;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.cta h3 {
+  margin: 0 0 0.8rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.cta p {
+  margin: 0 0 2rem;
+  font-size: 1.6rem;
+  color: #64748b;
+}
+
+.ctaBtn {
+  height: 40px;
+  padding: 0 2.6rem;
+  border: none;
+  border-radius: 12px;
+  background: #1d7af3;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .section {
+    padding: 5rem 1.8rem;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .title {
+    font-size: 3.2rem;
+  }
+}

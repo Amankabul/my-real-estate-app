@@ -1,0 +1,251 @@
+.section {
+  padding: 6rem 4rem;
+  background: #f8f9fb;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* TITLE + SUBTITLE */
+.topHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2.6rem;
+}
+
+.title {
+  font-size: 3.6rem;
+  color: #111;
+  font-weight: 500;
+  margin: 0 0 0.8rem;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 1.6rem;
+  color: #5b616a;
+}
+
+/* TOP FILTER BAR */
+.filters {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-bottom: 1.2rem;
+}
+
+.filterBtn {
+  border: none;
+  background: transparent;
+  padding: 0.8rem 0;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #6a707a;
+  position: relative;
+}
+
+.filterBtn:hover {
+  color: #111;
+}
+
+.filterActive {
+  color: #1d7af3;
+}
+
+.filterActive::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1.2rem;
+  width: 100%;
+  height: 3px;
+  background: #1d7af3;
+  border-radius: 999px;
+}
+
+/* line under the filter bar */
+.divider {
+  height: 1px;
+  background: #e7ebf2;
+  margin-bottom: 2.6rem;
+}
+
+/* GRID (desktop/tablet default) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 2.6rem;
+}
+
+/* CARD */
+.card {
+  background: white;
+  border-radius: 1.8rem;
+  overflow: hidden;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.12);
+}
+
+/* IMAGE */
+.imageWrap {
+  position: relative;
+  height: 210px;
+  width: 100%;
+  background: #e9ecf1;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.noImage {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: #7b828c;
+  font-size: 1.4rem;
+}
+
+/* BOOKMARK */
+.bookmarkBtn {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+  font-size: 1.8rem;
+  display: grid;
+  place-items: center;
+}
+.save_bookmark {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+.bookmarkBtn:hover {
+  background: white;
+}
+
+/* CONTENT */
+.content {
+  padding: 1.8rem;
+}
+
+.price {
+  margin: 0;
+  font-size: 2.1rem;
+  font-weight: 500;
+  color: #111;
+}
+
+.address {
+  margin: 0.6rem 0 1.4rem;
+  font-size: 1.5rem;
+  color: #6a707a;
+}
+
+/* Meta row */
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  font-size: 1.4rem;
+  color: #6a707a;
+  padding: 1.2rem 0;
+  border-top: 1px solid #eef1f6;
+  margin-bottom: 1.4rem;
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* CTA Button */
+.detailsBtn {
+  width: 100%;
+  height: 3.8rem;
+  border: none;
+  border-radius: 1.2rem;
+  background: #1d7af3;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.detailsBtn:hover {
+  filter: brightness(0.98);
+}
+
+/* Status */
+.status {
+  padding: 4rem;
+  text-align: center;
+  font-size: 1.6rem;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .section {
+    padding: 4rem 1.8rem;
+  }
+
+  .filters {
+    gap: 1.8rem;
+  }
+
+  .filterActive::after {
+    bottom: -1rem;
+  }
+}
+
+/* ✅ MOBILE SWIPE / HORIZONTAL OVERFLOW */
+@media (max-width: 700px) {
+  .grid {
+    display: grid;
+    grid-auto-flow: column; /* horizontal flow */
+    grid-auto-columns: 85%; /* each card takes 85% width */
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 1.6rem;
+
+    padding-left: 1.6rem; /* nice spacing at edges */
+    padding-right: 1.6rem;
+    padding-bottom: 1rem;
+
+    scroll-snap-type: x mandatory; /* snapping */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .card {
+    scroll-snap-align: start;
+  }
+
+  /* Hide scrollbar (optional) */
+  .grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .grid {
+    scrollbar-width: none;
+  }
+}

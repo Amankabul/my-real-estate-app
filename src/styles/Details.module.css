@@ -1,0 +1,287 @@
+.page {
+  width: 100%;
+  background: #ffffff;
+}
+
+.container {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  padding: 26px 0 70px;
+}
+
+.status {
+  width: min(1100px, 92%);
+  margin: 24px auto;
+  color: #111827;
+}
+
+.statusError {
+  width: min(1100px, 92%);
+  margin: 24px auto;
+  color: #b91c1c;
+}
+
+/* ===== Header ===== */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.headerLeft {
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 3rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.address {
+  margin: 8px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 70ch;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+  color: #111827;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.actionBtn:active {
+  transform: translateY(1px);
+}
+
+/* ===== Gallery ===== */
+.galleryWrap {
+  width: 100%;
+}
+
+.empty {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 18px;
+  padding: 28px;
+  background: #fff;
+}
+
+.emptyTitle {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.emptyText {
+  margin: 0;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.mainCard {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f3f4f6;
+  max-height: 50rem;
+}
+
+.mainImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.mainOverlay {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  display: flex;
+}
+
+.tourBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(17, 24, 39, 0.55);
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+
+.tourBtn:active {
+  transform: translateY(1px);
+}
+
+.tourIcon {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.18);
+  display: inline-block;
+}
+
+.noImage {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: #6b7280;
+  font-weight: 800;
+}
+
+.thumbsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  max-height: 50rem;
+}
+
+.thumbCard {
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f3f4f6;
+
+  max-height: 50rem;
+}
+
+.thumbImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.thumbPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: #6b7280;
+  font-size: 13px;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.03),
+    rgba(0, 0, 0, 0.03) 10px,
+    rgba(0, 0, 0, 0.06) 10px,
+    rgba(0, 0, 0, 0.06) 20px
+  );
+}
+
+/* ===== Description ===== */
+.desc {
+  margin-top: 22px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 18px;
+  padding: 18px;
+  background: #fff;
+}
+
+.descTitle {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.descText {
+  margin: 0;
+  color: #374151;
+  line-height: 1.7;
+  font-size: 14px;
+  white-space: pre-line;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .galleryGrid {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 14px;
+  }
+
+  .mainCard {
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 820px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .galleryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .mainCard {
+    min-height: 320px;
+  }
+
+  .thumbCard {
+    min-height: 140px;
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    width: min(1100px, 94%);
+  }
+
+  .mainCard,
+  .thumbCard,
+  .empty,
+  .desc {
+    border-radius: 16px;
+  }
+
+  .mainCard {
+    min-height: 260px;
+  }
+
+  .thumbCard {
+    min-height: 120px;
+  }
+
+  .galleryGrid,
+  .thumbsGrid {
+    gap: 12px;
+  }
+
+  .actionBtn {
+    height: 38px;
+  }
+}

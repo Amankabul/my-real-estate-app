@@ -1,0 +1,203 @@
+/* ================= HEADER ================= */
+.header {
+  background: #fff;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.headerContainer {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  height: 72px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+}
+ {
+}
+.logoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #1677ff;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+}
+
+.nav a {
+  text-decoration: none;
+  font-weight: 700;
+  color: #374151;
+}
+
+.nav a:hover {
+  color: #1677ff;
+}
+
+.active {
+  color: #1677ff;
+}
+
+.loginBtn {
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 10px;
+  border: none;
+  background: #1677ff;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* ================= PAGE ================= */
+.page {
+  background: #fff;
+}
+
+.hero {
+  text-align: center;
+  padding: 56px 0 30px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.hero p {
+  max-width: 680px;
+  margin: 14px auto 0;
+  color: #64748b;
+}
+
+.section {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  padding-bottom: 70px;
+}
+.logoimage {
+  height: 4rem;
+  width: 12rem;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.9fr;
+  gap: 26px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 10px 28px rgba(17, 24, 39, 0.06);
+}
+
+.card h2 {
+  margin: 0 0 18px;
+}
+
+.form {
+  display: grid;
+  gap: 16px;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field label {
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.field input,
+.field textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.field textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.primaryBtn {
+  height: 50px;
+  border-radius: 12px;
+  border: none;
+  background: #1677ff;
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.rightCol {
+  display: grid;
+  gap: 18px;
+}
+
+.infoRow {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.icon img {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #e8f1ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mapBox {
+  height: 220px;
+  border-radius: 14px;
+  border: 1px dashed #cbd5e1;
+  display: grid;
+  place-items: center;
+  color: #94a3b8;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .twoCol {
+    grid-template-columns: 1fr;
+  }
+
+  .nav {
+    display: none;
+  }
+}
