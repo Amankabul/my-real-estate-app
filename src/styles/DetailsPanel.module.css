@@ -52,7 +52,7 @@
 
 .statValue {
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
   color: #111827;
   line-height: 1.15;
 }
@@ -60,6 +60,7 @@
 .statLabel {
   margin-top: 2px;
   font-size: 12px;
+  font-weight: 500;
   color: #6b7280;
   white-space: nowrap;
   overflow: hidden;
@@ -271,7 +272,7 @@
 
 .agentLabel {
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 500;
   color: #111827;
   margin-bottom: 12px;
 }
@@ -296,7 +297,8 @@
 }
 
 .agentName {
-  font-weight: 900;
+  font-weight: 700;
+  font-size: 1.2rem;
   color: #111827;
   line-height: 1.15;
 }
@@ -304,6 +306,7 @@
 .agentOrg {
   margin-top: 3px;
   font-size: 12px;
+  font-weight: 600;
   color: #6b7280;
 }
 
@@ -313,7 +316,7 @@
   border: 0;
   background: transparent;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 600;
   color: #1677ff;
   cursor: pointer;
 }

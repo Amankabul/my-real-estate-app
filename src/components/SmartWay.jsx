@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import styles from "../styles/SmartWay.module.css";
 
 // ✅ Your icons (based on your screenshot names)
@@ -40,8 +41,34 @@ const stats = [
 ];
 
 export default function SmartWay() {
+  const sectionRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className={styles.section}>
+    <section
+      ref={sectionRef}
+      className={`${styles.section} ${visible ? styles.sectionVisible : ""}`}
+    >
       <div className={styles.container}>
         {/* TOP TITLE */}
         <header className={styles.header}>

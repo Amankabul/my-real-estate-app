@@ -64,7 +64,7 @@ export default function SavedProperties() {
     const type = item?.type || "rent";
     navigate(`/details/${type}/${item.id}`);
   }
-
+  console.log(pageItems);
   return (
     <div className={styles.page}>
       <div className={styles.container}>
@@ -127,14 +127,12 @@ export default function SavedProperties() {
 
                     <div className={styles.meta}>
                       <span className={styles.metaItem}>
-                        🛏 {p.beds ?? p.bedrooms ?? "—"}
+                        🛏 {p.bedroom ?? p.bedrooms ?? "—"}
                       </span>
                       <span className={styles.metaItem}>
-                        🛁 {p.baths ?? p.bathrooms ?? "—"}
+                        🛁 {p.bathroom ?? p.Bathroom ?? "—"}
                       </span>
-                      <span className={styles.metaItem}>
-                        📐 {formatPrice(p.sqft ?? p.area)} sqft
-                      </span>
+                      <span className={styles.metaItem}>📐 {p.Size}</span>
                     </div>
 
                     <button

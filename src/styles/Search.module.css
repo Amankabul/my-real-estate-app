@@ -16,7 +16,7 @@
 .headerInner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 14px 5rem;
+  padding: 1rem 0rem 1rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,6 +30,7 @@
 
 .logo {
   width: 17rem;
+  cursor: pointer;
   height: 5rem;
   object-fit: contain;
   display: block;
@@ -68,6 +69,7 @@
   justify-content: space-between;
   gap: 16px;
 }
+
 .bookmarkBtn {
   position: absolute;
   right: 14px;
@@ -82,13 +84,16 @@
   display: grid;
   place-items: center;
 }
+
 .save_bookmark {
   height: 1.5rem;
   width: 1.5rem;
 }
+
 .bookmarkBtn:hover {
   background: white;
 }
+
 .title {
   margin: 0;
   font-size: 26px;
@@ -288,10 +293,12 @@
   border-top: 1px solid #eef1f5;
   margin-bottom: 12px;
 }
+
 .meta {
   display: flex;
   gap: 2rem;
 }
+
 .metaItem {
   display: flex;
   align-items: center;
@@ -300,10 +307,12 @@
   font-weight: 500;
   color: #6a707a;
 }
+
 .icons {
   height: 1.5rem;
   width: 1.6rem;
 }
+
 .metaText {
   font-size: 18.5px;
   color: #334155;
@@ -349,8 +358,42 @@
   }
 }
 
+/* ✅ MOBILE: 2 cards per row */
 @media (max-width: 520px) {
+  .main {
+    padding: 14px 12px 34px;
+  }
+
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  /* optional: make cards feel nicer in 2-col */
+  .imageWrap {
+    height: 130px;
+  }
+
+  .price {
+    font-size: 1.6rem;
+  }
+
+  .address {
+    font-size: 1.25rem;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .meta {
+    gap: 1.2rem;
+  }
+
+  .icons {
+    height: 1.3rem;
+    width: 1.3rem;
+  }
+
+  .detailsBtn {
+    height: 36px;
+    margin-top: 0.8rem;
   }
 }

@@ -67,8 +67,26 @@ export default function Search() {
 
   function toggleBookmark(property) {
     const exists = bookmark.some((p) => p.id === property.id);
-    if (exists) setBookmark(bookmark.filter((p) => p.id !== property.id));
-    else setBookmark([property, ...bookmark]);
+
+    if (exists) {
+      setBookmark(bookmark.filter((p) => p.id !== property.id));
+      return;
+    }
+
+    const cover = getCoverImage(property);
+
+    const coverUrl = cover?.image_path
+      ? supabase.storage.from(BUCKET).getPublicUrl(cover.image_path).data
+          .publicUrl
+      : null;
+
+    const itemToSave = {
+      ...property,
+      type: (params.type || "Rent").toLowerCase(), // so saved page can route correctly
+      image: coverUrl, // ✅ Saved page will show this
+    };
+
+    setBookmark([itemToSave, ...bookmark]);
   }
 
   return (

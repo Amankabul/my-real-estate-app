@@ -73,9 +73,11 @@
 .imgBgCool {
   background: linear-gradient(180deg, #c28ebe 0%, #ffffff 100%);
 }
+
 .imgBgBlue {
   background: linear-gradient(180deg, #73ba71 0%, #ffffff 100%);
 }
+
 .avatar {
   width: 100%;
   max-width: 260px;
@@ -100,7 +102,7 @@
   margin: 0 0 1.2rem;
   font-size: 1.2rem;
   font-weight: 600;
-  color: #1d7af3; /* blue like screenshot */
+  color: #1d7af3;
 }
 
 /* Tags */
@@ -187,4 +189,55 @@
   .imageWrap {
     height: 220px;
   }
+}
+
+/* ===============================
+   SCROLL REVEAL — BEHAVIOUR ONLY
+   =============================== */
+
+.section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+}
+
+.sectionVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heading {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition-delay: 0.08s;
+}
+
+.sectionVisible .heading {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.divider {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition-delay: 0.18s;
+}
+
+.sectionVisible .divider {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.grid {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition-delay: 0.3s;
+}
+
+.sectionVisible .grid {
+  opacity: 1;
+  transform: translateY(0);
 }

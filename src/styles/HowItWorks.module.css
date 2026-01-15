@@ -1,6 +1,16 @@
 .section {
   background: #ffffff;
   padding: 7.5rem 4rem;
+
+  /* ✅ reveal behaviour */
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+}
+
+.sectionVisible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .container {
@@ -12,6 +22,17 @@
 .header {
   text-align: center;
   margin-bottom: 5.5rem;
+
+  /* ✅ stagger like your testimonials */
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition-delay: 0.08s;
+}
+
+.sectionVisible .header {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .title {
@@ -21,6 +42,16 @@
   letter-spacing: -0.02em;
   line-height: 1.05;
   color: #0f172a; /* deep navy-ish like screenshot */
+
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition-delay: 0.18s;
+}
+
+.sectionVisible .title {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .subtitle {
@@ -30,6 +61,16 @@
   line-height: 1.55;
   color: #64748b; /* soft grey-blue */
   font-weight: 4 00;
+
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition-delay: 0.28s;
+}
+
+.sectionVisible .subtitle {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* GRID */
@@ -39,6 +80,16 @@
   gap: 2.4rem;
   align-items: stretch;
   margin-bottom: 5.5rem;
+
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition-delay: 0.4s;
+}
+
+.sectionVisible .grid {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* CARD */
@@ -87,6 +138,16 @@
 .ctaRow {
   display: flex;
   justify-content: center;
+
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition-delay: 0.55s;
+}
+
+.sectionVisible .ctaRow {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .ctaBtn {

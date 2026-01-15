@@ -1,6 +1,16 @@
 .section {
   background: #ffffff;
   padding: 7rem 4rem;
+
+  /* 🔥 scroll reveal base state */
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.3s ease, transform 1.3s ease;
+}
+
+.sectionVisible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .container {

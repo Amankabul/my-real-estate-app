@@ -72,6 +72,11 @@
 .actionBtn:active {
   transform: translateY(1px);
 }
+.logo {
+  height: 4rem;
+  margin: 2rem 0rem 1rem 5rem;
+  cursor: pointer;
+}
 
 /* ===== Gallery ===== */
 .galleryWrap {
@@ -267,7 +272,10 @@
   .desc {
     border-radius: 16px;
   }
-
+  .logo {
+    margin-left: 2rem;
+    height: 3rem;
+  }
   .mainCard {
     min-height: 260px;
   }

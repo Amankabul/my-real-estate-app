@@ -1,15 +1,12 @@
-import { useMemo, useEffect } from "react";
-import PropTypes from "prop-types";
+import { useMemo } from "react";
 import styles from "../styles/FearturedProperties.module.css";
 import { useFeaturedStore } from "../Store/useFeaturedStore";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-
-import { fetchFeaturedProperties } from "../queries/featured";
 import { useBookMarkStore } from "../Store/useBookMarkStore.js";
 import save from "../icons/save-instagram.png"; // soft
 import saveBold from "../icons/bookmark.png"; // bold
 import { useNavigate } from "react-router-dom";
+import { fetchFeaturedProperties } from "../queries/featured";
 
 const FILTERS = [
   { key: "Rent", label: "For Rent" },
@@ -22,26 +19,35 @@ function getCoverImage(property) {
 }
 
 export default function FeaturedProperties() {
-  const [showSpinner, setShowSpinner] = useState(false);
-  console.log(showSpinner);
   const navigate = useNavigate();
+
   const activeFilter = useFeaturedStore((s) => s.activeFilter);
   const setActiveFilter = useFeaturedStore((s) => s.setActiveFilter);
+
   const bookmark = useBookMarkStore((s) => s.bookmark);
   const setBookmark = useBookMarkStore((s) => s.setBookmark);
+
   const {
     data: properties = [],
     isLoading,
+    isFetching,
     error,
   } = useQuery({
     queryKey: ["featured-properties", activeFilter],
     queryFn: () => fetchFeaturedProperties(activeFilter),
+
+    // ✅ prevents refetch loops that remount cards & restart image downloads
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: 1,
+
+    // ✅ keep old cards visible while new filter loads
+    placeholderData: (prev) => prev,
   });
 
-  useEffect(() => {}, [bookmark]);
-
   function navigateTo(property) {
-    const type = activeFilter; // rent / sell
+    const type = activeFilter; // "Rent" / "Sell"
     navigate(`/details/${type}/${property.id}`);
   }
 
@@ -50,25 +56,14 @@ export default function FeaturedProperties() {
     if (exists) setBookmark(bookmark.filter((p) => p.id !== property.id));
     else setBookmark([property, ...bookmark]);
   }
-  console.log(bookmark);
+
   const bookmarkedIds = useMemo(
     () => new Set(bookmark.map((p) => p.id)),
     [bookmark]
   );
-  useEffect(() => {
-    let timer;
 
-    if (isLoading) {
-      timer = setTimeout(() => {
-        setShowSpinner(true);
-      }, 2500); // ⏱ 2.5 seconds
-    } else {
-      setShowSpinner(false);
-    }
-
-    return () => clearTimeout(timer);
-  }, [isLoading]);
-  if (isLoading)
+  // ✅ Only show full-page loader on FIRST load when nothing is rendered yet
+  if (isLoading && properties.length === 0) {
     return (
       <div
         className={styles.status}
@@ -100,13 +95,15 @@ export default function FeaturedProperties() {
         </style>
       </div>
     );
+  }
 
-  if (error)
+  if (error) {
     return (
       <p className={styles.status}>
         {error?.message || "Failed to load featured properties"}
       </p>
     );
+  }
 
   return (
     <section className={styles.section}>
@@ -137,6 +134,13 @@ export default function FeaturedProperties() {
 
         <div className={styles.divider} />
 
+        {/* ✅ IMPORTANT: show “Updating…” instead of unmounting the whole grid */}
+        {isFetching && (
+          <p className={styles.status} style={{ margin: "10px 0 18px" }}>
+            Updating...
+          </p>
+        )}
+
         <div className={styles.grid}>
           {properties.map((property) => {
             const cover = getCoverImage(property);
@@ -151,6 +155,7 @@ export default function FeaturedProperties() {
                       alt={property.Name || "Property"}
                       className={styles.image}
                       loading="lazy"
+                      decoding="async"
                     />
                   ) : (
                     <div className={styles.noImage}>No cover image</div>
@@ -177,9 +182,13 @@ export default function FeaturedProperties() {
                   </p>
 
                   <div className={styles.meta}>
-                    <span className={styles.metaItem}>🛏 3</span>
-                    <span className={styles.metaItem}>🛁 2</span>
-                    <span className={styles.metaItem}>📐 2,400 sqft</span>
+                    <span className={styles.metaItem}>
+                      🛏 {property.bedroom}
+                    </span>
+                    <span className={styles.metaItem}>
+                      🛁 {property.Bathroom}
+                    </span>
+                    <span className={styles.metaItem}>📐 {property.Size}</span>
                   </div>
 
                   <button
@@ -202,8 +211,3 @@ export default function FeaturedProperties() {
     </section>
   );
 }
-
-FeaturedProperties.propTypes = {
-  bookmark: PropTypes.array.isRequired,
-  setBookmark: PropTypes.func.isRequired,
-};

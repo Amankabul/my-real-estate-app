@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/HelpfulGuides.module.css";
 
 import imgBuying from "../images/pexels-mikhail-nilov-7736029.jpg";
-import imgRenting from "../images/pexels-anna-nekrashevich-8534460.jpg";
+import imgRenting from "../images/pexels-cristian-rojas-7261085.jpg";
 import imgGuide from "../images/pexels-pixabay-280221.jpg";
 import imgInvi from "../images/pexels-pixabay-128867.jpg";
 import agreement from "../images/pexels-fauxels-3184416.jpg";
@@ -118,12 +118,35 @@ export default function HelpfulGuides() {
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
 
+  const sectionRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const visibleArticles = showAll ? articles : articles.slice(0, 3);
 
   return (
-    <section className={styles.section}>
+    <section
+      ref={sectionRef}
+      className={`${styles.section} ${visible ? styles.sectionVisible : ""}`}
+    >
       <div className={styles.container}>
-        {/* Heading */}
         <header className={styles.header}>
           <h2 className={styles.title}>Helpful Guides &amp; Resources</h2>
           <p className={styles.subtitle}>
@@ -134,7 +157,6 @@ export default function HelpfulGuides() {
           </p>
         </header>
 
-        {/* Cards */}
         <div className={styles.grid}>
           {visibleArticles.map((a) => (
             <article key={a.id} className={styles.card}>
@@ -148,7 +170,6 @@ export default function HelpfulGuides() {
                 <h3 className={styles.cardTitle}>{a.title}</h3>
                 <p className={styles.text}>{a.text}</p>
 
-                {/* ✅ Redirect to details page */}
                 <button
                   className={styles.readMore}
                   type="button"
@@ -161,7 +182,6 @@ export default function HelpfulGuides() {
           ))}
         </div>
 
-        {/* Bottom button */}
         <div className={styles.bottom}>
           <button
             className={styles.viewAll}

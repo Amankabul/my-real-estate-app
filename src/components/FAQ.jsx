@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "../styles/FAQ.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -107,11 +107,38 @@ export default function FAQ() {
   const [activeTab, setActiveTab] = useState("buying");
   const [openIndex, setOpenIndex] = useState(0);
   const navigate = useNavigate();
+
   function handleDirect() {
     navigate(`/contact-us`);
   }
+
+  // ✅ scroll reveal (behaviour only)
+  const sectionRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className={styles.section}>
+    <section
+      ref={sectionRef}
+      className={`${styles.section} ${visible ? styles.sectionVisible : ""}`}
+    >
       <div className={styles.container}>
         <header className={styles.header}>
           <h2 className={styles.title}>Frequently Asked Questions</h2>
@@ -133,6 +160,7 @@ export default function FAQ() {
                 setActiveTab(tab.key);
                 setOpenIndex(0);
               }}
+              type="button"
             >
               {tab.label}
             </button>
@@ -145,6 +173,7 @@ export default function FAQ() {
               <button
                 className={styles.question}
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                type="button"
               >
                 <span>{item.q}</span>
                 <span

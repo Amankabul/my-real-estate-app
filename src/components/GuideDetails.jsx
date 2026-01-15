@@ -1,9 +1,9 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "../styles/GuideDetails.module.css";
 
 import imgBuying from "../images/pexels-mikhail-nilov-7736029.jpg";
-import imgRenting from "../images/pexels-anna-nekrashevich-8534460.jpg";
+import imgRenting from "../images/pexels-cristian-rojas-7261085.jpg";
 import imgGuide from "../images/pexels-pixabay-280221.jpg";
 import imgInvi from "../images/pexels-pixabay-128867.jpg";
 import agreement from "../images/pexels-fauxels-3184416.jpg";
@@ -143,6 +143,11 @@ export default function GuideDetails() {
   const navigate = useNavigate();
 
   const article = useMemo(() => articles.find((a) => a.slug === slug), [slug]);
+
+  // 👇 Force scroll to top when this page opens
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
 
   if (!article) {
     return (

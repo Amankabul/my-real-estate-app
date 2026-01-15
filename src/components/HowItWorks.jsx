@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import styles from "../styles/HowItWorks.module.css";
 
 import iconSearch from "../icons/magnifying-glass-solid-full.svg";
@@ -33,8 +34,34 @@ const steps = [
 ];
 
 export default function HowItWorks() {
+  const sectionRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className={styles.section}>
+    <section
+      ref={sectionRef}
+      className={`${styles.section} ${visible ? styles.sectionVisible : ""}`}
+    >
       <div className={styles.container}>
         {/* Heading */}
         <header className={styles.header}>

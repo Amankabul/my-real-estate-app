@@ -17,6 +17,10 @@
 
   /* ✅ keep modal inside viewport */
   min-height: 100vh;
+
+  /* ✅ helps sticky areas behave nicely */
+  display: flex;
+  flex-direction: column;
 }
 
 .top {
@@ -69,6 +73,9 @@
 
   /* keep your original base height feeling */
   min-height: 560px;
+
+  /* ✅ make it fill the modal remaining space */
+  flex: 1;
 }
 
 .left {
@@ -82,6 +89,7 @@
   padding: 18px 22px 22px;
   border-left: 1px solid #eef2f7;
   background: #fbfdff;
+  border-bottom-right-radius: 10px;
 
   /* ✅ allow internal scroll in grid layout */
   min-height: 0;
@@ -239,15 +247,19 @@
   gap: 14px;
   padding: 14px 0 16px;
 }
-
+.logo {
+  height: 4rem;
+  margin: 2rem 0rem 2rem 3.5rem;
+  cursor: pointer;
+}
 .field {
   display: grid;
   gap: 8px;
 }
 
 .label {
-  font-size: 13px;
-  font-weight: 800;
+  font-size: 15px;
+  font-weight: 600;
   color: #111827;
 }
 
@@ -288,22 +300,13 @@
   padding-top: 16px;
   margin-top: 8px;
 }
-.timeSelected {
-  border-color: #1677ff;
-  color: #1677ff;
-  box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.12);
-}
 
 .agentTitle {
   margin: 0 0 12px;
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 700;
   color: #111827;
 }
-/* =========================
-   React Calendar overrides
-   (ONLY calendar styling)
-   ========================= */
 
 .calendarWrap {
   width: 100%;
@@ -332,7 +335,7 @@
   border: 1px solid #e5e7eb;
   background: #fff;
   cursor: pointer;
-  font-weight: 800;
+  font-weight: 1100;
   color: #111827;
 }
 
@@ -372,6 +375,7 @@
   background: transparent;
   cursor: pointer;
   font-weight: 700;
+  font-size: 1.2rem;
   color: #111827;
 }
 
@@ -438,17 +442,33 @@
 
 /* Responsive */
 @media (max-width: 980px) {
+  /* ✅ switch to flex so we can reorder blocks cleanly */
   .content {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
   }
 
+  /* ✅ right (agent/form) comes first */
   .right {
+    order: 1;
     border-left: 0;
+    border-top: 0;
+  }
+
+  /* ✅ left (calendar/time) comes second */
+  .left {
+    order: 2;
     border-top: 1px solid #eef2f7;
   }
 
+  /* ✅ CTA always at the end + sticky bottom on mobile */
   .confirmRow {
     justify-content: stretch;
+    position: sticky;
+    bottom: 0;
+    padding: 12px 0 0;
+    background: linear-gradient(to top, #fff 70%, rgba(255, 255, 255, 0));
   }
 
   .confirmBtn {

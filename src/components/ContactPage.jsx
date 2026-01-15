@@ -15,20 +15,6 @@ export default function ContactPage() {
           <div className={styles.logo}>
             <img src={logo} alt="logo" className={styles.logoimage} />
           </div>
-
-          {/* Nav */}
-          <nav className={styles.nav}>
-            <a href="#">Home</a>
-            <a href="#">Properties</a>
-            <a href="#">Agents</a>
-            <a href="#">About</a>
-            <a href="#" className={styles.active}>
-              Contact Us
-            </a>
-          </nav>
-
-          {/* Login */}
-          <button className={styles.loginBtn}>Login</button>
         </div>
       </header>
 
@@ -88,7 +74,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <strong>Phone</strong>
-                    <p>+1 (234) 567-890</p>
+                    <p className={styles.strong}>+1 (234) 567-890</p>
                   </div>
                 </div>
 
@@ -98,7 +84,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <strong>Email</strong>
-                    <p>contact@realestate.com</p>
+                    <p className={styles.strong}>contact@realestate.com</p>
                   </div>
                 </div>
 
@@ -108,7 +94,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <strong>Address</strong>
-                    <p>123 Market Street, Suite 450, San Francisco, CA 94103</p>
+                    <p className={styles.strong}>
+                      123 Market Street, Suite 450, San Francisco, CA 94103
+                    </p>
                   </div>
                 </div>
 
@@ -118,7 +106,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <strong>Office Hours</strong>
-                    <p>Mon - Fri: 9:00 AM - 5:00 PM</p>
+                    <p className={styles.strong}>
+                      Mon - Fri: 9:00 AM - 5:00 PM
+                    </p>
                   </div>
                 </div>
               </div>

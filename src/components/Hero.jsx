@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Select from "react-select";
 import styles from "../styles/Hero.module.css";
 import logo from "../images/new-logo.png";
@@ -15,6 +15,30 @@ export default function Hero() {
   function handleDirectToContact() {
     navigate(`/contact-us`);
   }
+
+  const sectionRef = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const [activeTab, setActiveTab] = useState("Rent");
   const bookmark = useBookMarkStore((state) => state.bookmark);
 
@@ -72,7 +96,10 @@ export default function Hero() {
   }
 
   return (
-    <section className={styles.hero}>
+    <section
+      ref={sectionRef}
+      className={`${styles.hero} ${visible ? styles.heroVisible : ""}`}
+    >
       <nav className={styles.navbar}>
         <div className={styles.logo}>
           <img src={logo} alt="RealtyCo logo" />
@@ -94,11 +121,13 @@ export default function Hero() {
       </nav>
 
       <div className={styles.heroContent}>
-        <h1>
+        <h1 className={styles.heroTitle}>
           Find your next home in <br />
           <span>Manchester</span>
         </h1>
-        <p>The easiest way to buy, sell, and rent properties in the city.</p>
+        <p className={styles.heroSubtitle}>
+          The easiest way to buy, sell, and rent properties in the city.
+        </p>
 
         <div className={styles.searchBox}>
           {/* TABS */}
@@ -134,7 +163,13 @@ export default function Hero() {
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
               />
-              {addressError && <span>{addressError}</span>}
+              {addressError && (
+                <span
+                  style={{ color: "red", fontSize: "16 px", marginLeft: "5px" }}
+                >
+                  {addressError}
+                </span>
+              )}
             </div>
 
             <div className={styles.field}>
