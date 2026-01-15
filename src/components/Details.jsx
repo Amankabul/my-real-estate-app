@@ -6,6 +6,7 @@ import { supabase } from "../supabase-client";
 import styles from "../styles/Details.module.css";
 import DetailsPanel from "./DetailsPanel.jsx";
 import logo from "../images/new-logo.png";
+
 export default function Details() {
   const navigate = useNavigate();
   const { type, id } = useParams();
@@ -13,8 +14,9 @@ export default function Details() {
   function handleDirect() {
     navigate(`/`);
   }
-  // ✅ pick bucket based on type (change names if yours are different)
-  const BUCKET = type?.toLowerCase() === "sell" ? "sell-images" : "rent-images";
+
+  // ✅ YOU ONLY HAVE ONE BUCKET
+  const BUCKET = "rent-images";
 
   const [imagesWithUrl, setImagesWithUrl] = useState([]);
 
@@ -23,26 +25,38 @@ export default function Details() {
     enabled: !!type && !!id,
     queryFn: () => fetchPropertyDetails({ type, id }),
 
-    // ✅ stop refetch that remounts/reloads images
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     retry: 1,
-
-    // ✅ keep old data rendered while it refetches
     placeholderData: (prev) => prev,
   });
 
+  // ✅ handle both relations (rent_images or sell_images)
   const images = useMemo(
     () => data?.rent_images ?? data?.sell_images ?? [],
     [data]
   );
 
-  /**
-   * ✅ URL Strategy:
-   * - If your bucket is PUBLIC: use stable public URL (best, no flicker)
-   * - If your bucket is PRIVATE: signed URLs are fine, but ONLY generate when images list changes
-   */
+  function cleanPath(p) {
+    if (!p) return "";
+    let x = String(p).trim();
+    if (x.startsWith("/")) x = x.slice(1);
+
+    // If a full URL was saved by mistake, try to extract the file path after the bucket name
+    const marker = `/storage/v1/object/`;
+    if (x.includes(marker)) {
+      // try to find ".../rent-images/<path>"
+      const idx = x.indexOf(marker);
+      const tail = x.slice(idx + marker.length); // "public/rent-images/abc.jpg" or "sign/rent-images/abc.jpg"
+      const parts = tail.split("/");
+      const bucketIndex = parts.findIndex((p) => p === BUCKET);
+      if (bucketIndex !== -1) x = parts.slice(bucketIndex + 1).join("/");
+    }
+
+    return x;
+  }
+
   useEffect(() => {
     let cancelled = false;
 
@@ -52,17 +66,26 @@ export default function Details() {
         return;
       }
 
-      const signedOut = await Promise.all(
+      const out = await Promise.all(
         images.map(async (img) => {
-          const path = (img?.image_path || "").trim();
+          const rawPath = img?.image_path || "";
+          const path = cleanPath(rawPath);
+
           if (!path) return { ...img, publicUrl: "" };
 
-          const { data: signed, error } = await supabase.storage
-            .from(BUCKET)
-            .createSignedUrl(path, 60 * 60); // 1 hour
+          // ✅ best for public buckets
+          const pub = supabase.storage.from(BUCKET).getPublicUrl(path);
+          const publicUrl = pub?.data?.publicUrl || "";
 
-          if (error) {
-            console.log("SIGNED URL ERROR:", { BUCKET, path, error });
+          if (publicUrl) return { ...img, publicUrl };
+
+          // fallback signed url (if bucket not public)
+          const { data: signed, error: signErr } = await supabase.storage
+            .from(BUCKET)
+            .createSignedUrl(path, 60 * 60);
+
+          if (signErr) {
+            console.log("SIGNED URL ERROR:", { BUCKET, path, signErr, img });
             return { ...img, publicUrl: "" };
           }
 
@@ -70,7 +93,7 @@ export default function Details() {
         })
       );
 
-      if (!cancelled) setImagesWithUrl(signedOut);
+      if (!cancelled) setImagesWithUrl(out);
     }
 
     buildUrls();
@@ -78,9 +101,8 @@ export default function Details() {
     return () => {
       cancelled = true;
     };
-  }, [images, BUCKET]);
+  }, [images]);
 
-  // ✅ Only show full-screen loader on FIRST load (no data to show yet)
   if (isLoading && !data) {
     return (
       <div
@@ -126,8 +148,8 @@ export default function Details() {
         className={styles.logo}
         onClick={() => handleDirect()}
       />
+
       <div className={styles.container}>
-        {/* Header */}
         <div className={styles.header}>
           <div className={styles.headerLeft}>
             <h1 className={styles.title}>{data?.Name || "Property Name"}</h1>
@@ -135,25 +157,22 @@ export default function Details() {
           </div>
         </div>
 
-        {/* ✅ IMPORTANT: show “Updating…” instead of unmounting */}
         {isFetching && (
           <p className={styles.status} style={{ margin: "6px 0 14px" }}>
             Updating...
           </p>
         )}
 
-        {/* Gallery */}
         <section className={styles.galleryWrap}>
           {!imagesWithUrl.length ? (
             <div className={styles.empty}>
               <p className={styles.emptyTitle}>No images found</p>
               <p className={styles.emptyText}>
-                Images will appear here when your data loads from the database.
+                This project uses one storage bucket: <b>{BUCKET}</b>
               </p>
             </div>
           ) : (
             <div className={styles.galleryGrid}>
-              {/* Big */}
               <article className={styles.mainCard}>
                 {big?.publicUrl ? (
                   <img
@@ -176,7 +195,6 @@ export default function Details() {
                 </div>
               </article>
 
-              {/* Small 4 */}
               <aside className={styles.thumbsGrid}>
                 {small.map((img) => (
                   <article key={img.id} className={styles.thumbCard}>

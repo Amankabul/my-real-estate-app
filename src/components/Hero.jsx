@@ -5,9 +5,11 @@ import logo from "../images/new-logo.png";
 import save from "../icons/save-instagram.png";
 import { useBookMarkStore } from "../Store/useBookMarkStore";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../supabase-client";
 
 export default function Hero() {
   const navigate = useNavigate();
+
   function handleDirect() {
     navigate(`/saved-properties`);
   }
@@ -65,13 +67,99 @@ export default function Hero() {
   const [moveIn, setMoveIn] = useState(undefined);
   const [addressError, setAddressError] = useState("");
 
+  // ===================== Suggestions (Typeahead) =====================
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [suggestLoading, setSuggestLoading] = useState(false);
+  const [suggestError, setSuggestError] = useState("");
+
+  const debounceRef = useRef(null);
+  // ==================================================================
+
   function switchTab(nextTab) {
     setActiveTab(nextTab);
 
-    // optional UX: reset filters when switching between Rent/Sell
     setRooms(undefined);
     setMoveIn(undefined);
     setAddressError("");
+
+    // reset suggestions
+    setSuggestions([]);
+    setSuggestError("");
+    setShowSuggestions(false);
+  }
+
+  useEffect(() => {
+    const q = address.trim();
+
+    // If less than 2 chars, close dropdown
+    if (q.length < 2) {
+      setSuggestions([]);
+      setSuggestError("");
+      setShowSuggestions(false);
+      setSuggestLoading(false);
+      return;
+    }
+
+    setShowSuggestions(true); // ✅ keep it open while typing
+
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    debounceRef.current = setTimeout(async () => {
+      try {
+        setSuggestLoading(true);
+        setSuggestError("");
+
+        // pick table by tab
+        const table = activeTab === "Rent" ? "Rent" : "Sell";
+
+        // ✅ SIMPLE + RELIABLE query (only address)
+        // We know you have `address` from your search URLs.
+        const { data, error } = await supabase
+          .from(table)
+          .select("id,address")
+          .ilike("address", `%${q}%`)
+          .limit(8);
+
+        if (error) {
+          console.error("Suggestion error:", error);
+          setSuggestions([]);
+          setSuggestError(error.message || "Permission / query error");
+          return;
+        }
+
+        const items =
+          (data ?? []).map((p) => ({
+            id: `${activeTab.toLowerCase()}-${p.id}`,
+            label: p.address ?? `#${p.id}`,
+            type: activeTab.toLowerCase(), // "rent" | "sell"
+            propertyId: p.id,
+          })) ?? [];
+
+        setSuggestions(items);
+      } catch (err) {
+        console.error("Suggestion crash:", err);
+        setSuggestions([]);
+        setSuggestError("Unexpected error. Check console.");
+      } finally {
+        setSuggestLoading(false);
+      }
+    }, 250);
+
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, [address, activeTab]);
+
+  function handlePickSuggestion(item) {
+    if (item?.type && item?.propertyId) {
+      setShowSuggestions(false);
+      navigate(`/details/${item.type}/${item.propertyId}`);
+      return;
+    }
+
+    if (item?.label) setAddress(item.label);
+    setShowSuggestions(false);
   }
 
   function handleSearch() {
@@ -91,6 +179,7 @@ export default function Hero() {
     if (rooms) params.set("rooms", String(rooms));
     if (moveIn) params.set("moveIn", moveIn);
 
+    setShowSuggestions(false);
     navigate(`/search?${params.toString()}`);
     console.log(params.toString());
   }
@@ -155,22 +244,102 @@ export default function Hero() {
 
           {/* SEARCH FIELDS */}
           <div className={styles.searchFields}>
-            <div className={styles.field}>
+            {/* ========= Location + Suggestions ========= */}
+            <div className={styles.field} style={{ position: "relative" }}>
               <label>Location</label>
               <input
                 type="text"
                 placeholder="e.g., Deansgate, Ancoats..."
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
+                onFocus={() =>
+                  address.trim().length >= 2 && setShowSuggestions(true)
+                }
+                onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
               />
+
               {addressError && (
                 <span
-                  style={{ color: "red", fontSize: "16 px", marginLeft: "5px" }}
+                  style={{ color: "red", fontSize: "16px", marginLeft: "5px" }}
                 >
                   {addressError}
                 </span>
               )}
+
+              {/* ✅ Always show dropdown when typing >=2 chars */}
+              {showSuggestions && address.trim().length >= 2 && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "105%",
+                    left: 0,
+                    right: 0,
+                    background: "#fff",
+                    border: "1px solid #e6eaf1",
+                    borderRadius: 12,
+                    overflow: "hidden",
+                    zIndex: 50,
+                    boxShadow: "0 12px 30px rgba(0,0,0,0.12)",
+                  }}
+                >
+                  {suggestLoading && (
+                    <div style={{ padding: 12, fontSize: 14, opacity: 0.75 }}>
+                      Searching…
+                    </div>
+                  )}
+
+                  {!suggestLoading && suggestError && (
+                    <div
+                      style={{ padding: 12, fontSize: 14, color: "#b91c1c" }}
+                    >
+                      Error: {suggestError}
+                    </div>
+                  )}
+
+                  {!suggestLoading &&
+                    !suggestError &&
+                    suggestions.length === 0 && (
+                      <div style={{ padding: 12, fontSize: 14, opacity: 0.75 }}>
+                        No results found
+                      </div>
+                    )}
+
+                  {!suggestLoading &&
+                    !suggestError &&
+                    suggestions.map((item) => (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => handlePickSuggestion(item)}
+                        style={{
+                          width: "100%",
+                          textAlign: "left",
+                          padding: "10px 12px",
+                          border: "none",
+                          background: "transparent",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <div style={{ fontWeight: 700 }}>
+                          {item.label}
+                          <span
+                            style={{
+                              marginLeft: 8,
+                              fontSize: 12,
+                              opacity: 0.7,
+                              fontWeight: 600,
+                            }}
+                          >
+                            • {String(item.type).toUpperCase()}
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                </div>
+              )}
             </div>
+            {/* ========================================= */}
 
             <div className={styles.field}>
               <label>Room Number</label>

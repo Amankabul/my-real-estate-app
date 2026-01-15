@@ -1,8 +1,31 @@
+import { useEffect, useRef } from "react";
 import styles from "../styles/ContactAgentModal.module.css";
 
 export default function ContactAgentModal() {
+  const overlayRef = useRef(null);
+
+  useEffect(() => {
+    // ✅ keep scrollbar (no overflow hidden)
+    // 1) scroll page to top
+    window.scrollTo(0, 0);
+
+    // 2) also scroll the overlay container to top (if it has its own scroll)
+    if (overlayRef.current) {
+      overlayRef.current.scrollTop = 0;
+    }
+
+    // 3) ensure it's visible immediately
+    overlayRef.current?.focus?.();
+  }, []);
+
   return (
-    <div className={styles.overlay}>
+    <div
+      ref={overlayRef}
+      className={styles.overlay}
+      tabIndex={-1}
+      aria-modal="true"
+      role="dialog"
+    >
       <div className={styles.card}>
         {/* Header */}
         <div className={styles.header}>
