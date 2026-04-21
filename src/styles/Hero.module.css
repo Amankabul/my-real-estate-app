@@ -1,7 +1,8 @@
 /* HERO */
 .hero {
   min-height: 70vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
     url("../images/pexels-josh-hild-1270765-3573383.jpg") center / cover
       no-repeat;
   padding: 2rem 4rem;
@@ -10,7 +11,9 @@
   /* ✅ animation behaviour (same style as your testimonials section) */
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition:
+    opacity 1.3s ease-out,
+    transform 1.3s ease-out;
 }
 
 .heroVisible {
@@ -27,7 +30,9 @@
   /* ✅ animate in slightly after section becomes visible */
   opacity: 0;
   transform: translateY(14px);
-  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition:
+    opacity 1.3s ease-out,
+    transform 1.3s ease-out;
   transition-delay: 0.08s;
 }
 
@@ -88,7 +93,9 @@
   /* ✅ animate in after navbar */
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition:
+    opacity 1.3s ease-out,
+    transform 1.3s ease-out;
   transition-delay: 0.18s;
 }
 
@@ -114,7 +121,9 @@
 .heroTitle {
   opacity: 0;
   transform: translateY(14px);
-  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition:
+    opacity 1.3s ease-out,
+    transform 1.3s ease-out;
   transition-delay: 0.22s;
 }
 
@@ -126,7 +135,9 @@
 .heroSubtitle {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition:
+    opacity 1.3s ease-out,
+    transform 1.3s ease-out;
   transition-delay: 0.3s;
 }
 
@@ -148,7 +159,9 @@
   /* ✅ animate in last */
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+  transition:
+    opacity 1.3s ease-out,
+    transform 1.3s ease-out;
   transition-delay: 0.42s;
 }
 
@@ -281,14 +294,14 @@
 
 /* SEARCH BUTTON */
 .searchBtn {
-  height: 5.4rem; /* keep consistent with selects */
+  height: 3.7rem; /* keep consistent with selects */
   padding: 0 3.4rem;
   background: #1d7af3;
   border: none;
-  border-radius: 16px;
+  border-radius: 10px;
   color: white;
   font-size: 1.6rem;
-  font-weight: 800;
+  font-weight: 500;
   cursor: pointer;
 }
 

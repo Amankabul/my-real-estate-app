@@ -6,11 +6,19 @@ import img1 from "../images/pexels-nappy-3460134-removebg-preview.png";
 import img2 from "../images/pexels-koolshooters-6976943-removebg-preview.png";
 import img3 from "../images/pexels-divinetechygirl-1181424-removebg-preview.png";
 import img4 from "../images/pexels-olly-774909-removebg-preview.png";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 /* ✅ Your own icons (phone + email) — set paths to your icons */
 import phoneIcon from "../icons/message-solid-full.svg";
 import mailIcon from "../icons/phone-solid-full.svg";
 
+const notification = () => {
+  toast.info(
+    <span style={{ fontWeight: 600, fontSize: "1.5rem" }}>
+      Customer service profile will be available soon.
+    </span>,
+  );
+};
 const AGENTS = [
   {
     id: 1,
@@ -71,7 +79,7 @@ export default function TeamSection() {
           }
         });
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
     observer.observe(el);
@@ -83,6 +91,7 @@ export default function TeamSection() {
       ref={sectionRef}
       className={`${styles.section} ${visible ? styles.sectionVisible : ""}`}
     >
+      <ToastContainer position="top-right" autoClose={2000} />
       <div className={styles.container}>
         {/* Heading */}
         <header className={styles.heading}>
@@ -140,7 +149,11 @@ export default function TeamSection() {
                 </div>
 
                 {/* Button */}
-                <button className={styles.btn} type="button">
+                <button
+                  className={styles.btn}
+                  type="button"
+                  onClick={notification}
+                >
                   View Profile
                 </button>
               </div>

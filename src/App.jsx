@@ -19,6 +19,7 @@ import ContactPage from "./components/ContactPage.jsx";
 import AboutPage from "./components/AboutPage.jsx";
 import GuideDetails from "./components/GuideDetails.jsx";
 import SavedProperties from "./components/SavedProperties.jsx";
+
 function HomePage() {
   return (
     <>

@@ -5,8 +5,18 @@ import bed from "../icons/bed-solid-full.svg";
 import house from "../icons/house-solid-full.svg";
 import { useNavigate } from "react-router-dom";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import profile from "../images/profile.jpg";
 // You can control these later:
 // activeTab: "description" | "floorplans" | "map"
+const notification = () => {
+  toast.info(
+    <span style={{ fontWeight: 600, fontSize: "1.5rem" }}>
+      profile will be available soon.
+    </span>,
+  );
+};
 export default function DetailsPanel({ data }) {
   const navigate = useNavigate();
 
@@ -23,6 +33,7 @@ export default function DetailsPanel({ data }) {
   console.log(activeTab);
   return (
     <section className={styles.section}>
+      <ToastContainer position="top-right" autoClose={2000} />
       <div className={styles.container}>
         <div className={styles.grid}>
           {/* LEFT SIDE */}
@@ -130,7 +141,7 @@ export default function DetailsPanel({ data }) {
                 <div className={styles.placeholder}>
                   <div className={styles.placeholderTitle}>Floor Plans</div>
                   <div className={styles.placeholderSub}>
-                    Put your floor plan images/slider here.
+                    floor plans currently not available
                   </div>
                 </div>
               </div>
@@ -149,7 +160,16 @@ export default function DetailsPanel({ data }) {
                     </div>
                   </div>
                   <div className={styles.mapBody}>
-                    <div className={styles.mapFake}>Map Preview</div>
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      loading="lazy"
+                      allowFullScreen
+                      src={`https://www.google.com/maps?q=${encodeURIComponent(
+                        data.address,
+                      )}&z=14&output=embed`}
+                    ></iframe>
                   </div>
                 </div>
               </div>
@@ -190,11 +210,20 @@ export default function DetailsPanel({ data }) {
                 <div className={styles.agentLabel}>Listing Agent</div>
 
                 <div className={styles.agentRow}>
-                  <div className={styles.avatar} />
+                  <img
+                    src={profile}
+                    alt="profile"
+                    style={{ height: "5rem", borderRadius: " 100%" }}
+                  />
+
                   <div className={styles.agentInfo}>
                     <div className={styles.agentName}>Jane Doe</div>
                     <div className={styles.agentOrg}>RealtyCo Agents</div>
-                    <button type="button" className={styles.profileBtn}>
+                    <button
+                      type="button"
+                      className={styles.profileBtn}
+                      onClick={notification}
+                    >
                       View Profile
                     </button>
                   </div>

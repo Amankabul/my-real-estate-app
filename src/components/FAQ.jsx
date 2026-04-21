@@ -127,7 +127,7 @@ export default function FAQ() {
           observer.unobserve(entry.target);
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
     observer.observe(el);

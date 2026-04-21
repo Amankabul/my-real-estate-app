@@ -35,7 +35,7 @@ export default function Details() {
   // ✅ handle both relations (rent_images or sell_images)
   const images = useMemo(
     () => data?.rent_images ?? data?.sell_images ?? [],
-    [data]
+    [data],
   );
 
   function cleanPath(p) {
@@ -43,10 +43,8 @@ export default function Details() {
     let x = String(p).trim();
     if (x.startsWith("/")) x = x.slice(1);
 
-    // If a full URL was saved by mistake, try to extract the file path after the bucket name
     const marker = `/storage/v1/object/`;
     if (x.includes(marker)) {
-      // try to find ".../rent-images/<path>"
       const idx = x.indexOf(marker);
       const tail = x.slice(idx + marker.length); // "public/rent-images/abc.jpg" or "sign/rent-images/abc.jpg"
       const parts = tail.split("/");
@@ -73,7 +71,6 @@ export default function Details() {
 
           if (!path) return { ...img, publicUrl: "" };
 
-          // ✅ best for public buckets
           const pub = supabase.storage.from(BUCKET).getPublicUrl(path);
           const publicUrl = pub?.data?.publicUrl || "";
 
@@ -90,7 +87,7 @@ export default function Details() {
           }
 
           return { ...img, publicUrl: signed?.signedUrl || "" };
-        })
+        }),
       );
 
       if (!cancelled) setImagesWithUrl(out);
@@ -222,7 +219,7 @@ export default function Details() {
                         <span>Image</span>
                       </div>
                     </article>
-                  )
+                  ),
                 )}
               </aside>
             </div>

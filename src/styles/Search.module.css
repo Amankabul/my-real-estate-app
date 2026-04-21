@@ -2,7 +2,13 @@
   min-height: 100vh;
   background: #f6f7f9;
   color: #0f172a;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
 }
 
 /* =========================

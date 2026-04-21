@@ -57,7 +57,7 @@ export default function Search() {
 
   const bookmarkedIds = useMemo(
     () => new Set(bookmark.map((p) => p.id)),
-    [bookmark]
+    [bookmark],
   );
 
   function getCoverImage(property) {
@@ -115,7 +115,6 @@ export default function Search() {
 
       {/* BODY */}
       <main className={styles.main}>
-        {/* ✅ CENTERED SPINNER */}
         {(isLoading || showSpinner) && (
           <div
             style={{

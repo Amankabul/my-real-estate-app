@@ -3,10 +3,16 @@ import styles from "../styles/FearturedProperties.module.css";
 import { useFeaturedStore } from "../Store/useFeaturedStore";
 import { useQuery } from "@tanstack/react-query";
 import { useBookMarkStore } from "../Store/useBookMarkStore.js";
-import save from "../icons/save-instagram.png"; // soft
-import saveBold from "../icons/bookmark.png"; // bold
+import save from "../icons/save-instagram.png";
+import saveBold from "../icons/bookmark.png";
 import { useNavigate } from "react-router-dom";
 import { fetchFeaturedProperties } from "../queries/featured";
+import bath from "../icons/bath-solid-full.svg";
+import bed from "../icons/bed-solid-full.svg";
+import house from "../icons/house-solid-full.svg";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FILTERS = [
   { key: "Rent", label: "For Rent" },
@@ -35,34 +41,35 @@ export default function FeaturedProperties() {
   } = useQuery({
     queryKey: ["featured-properties", activeFilter],
     queryFn: () => fetchFeaturedProperties(activeFilter),
-
-    // ✅ prevents refetch loops that remount cards & restart image downloads
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     retry: 1,
-
-    // ✅ keep old cards visible while new filter loads
     placeholderData: (prev) => prev,
   });
 
   function navigateTo(property) {
-    const type = activeFilter; // "Rent" / "Sell"
+    const type = activeFilter;
     navigate(`/details/${type}/${property.id}`);
   }
 
   function toggleBookmark(property) {
     const exists = bookmark.some((p) => p.id === property.id);
-    if (exists) setBookmark(bookmark.filter((p) => p.id !== property.id));
-    else setBookmark([property, ...bookmark]);
+
+    if (exists) {
+      setBookmark(bookmark.filter((p) => p.id !== property.id));
+      toast.info("Property removed from bookmarks");
+    } else {
+      setBookmark([property, ...bookmark]);
+      toast.success("Property successfully added to bookmarks");
+    }
   }
 
   const bookmarkedIds = useMemo(
     () => new Set(bookmark.map((p) => p.id)),
-    [bookmark]
+    [bookmark],
   );
 
-  // ✅ Only show full-page loader on FIRST load when nothing is rendered yet
   if (isLoading && properties.length === 0) {
     return (
       <div
@@ -100,13 +107,17 @@ export default function FeaturedProperties() {
   if (error) {
     return (
       <p className={styles.status}>
-        {error?.message || "Failed to load featured properties"}
+        {error?.message ||
+          "Failed to load featured properties cheke your internet connection and try agian "}
       </p>
     );
   }
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id="featredProperties">
+      {/* Toast container */}
+      <ToastContainer position="top-right" autoClose={2000} />
+
       <div className={styles.container}>
         <div className={styles.topHeader}>
           <div>
@@ -134,7 +145,6 @@ export default function FeaturedProperties() {
 
         <div className={styles.divider} />
 
-        {/* ✅ IMPORTANT: show “Updating…” instead of unmounting the whole grid */}
         {isFetching && (
           <p className={styles.status} style={{ margin: "10px 0 18px" }}>
             Updating...
@@ -183,12 +193,19 @@ export default function FeaturedProperties() {
 
                   <div className={styles.meta}>
                     <span className={styles.metaItem}>
-                      🛏 {property.bedroom}
+                      <img src={bed} alt="bedroom" className={styles.icons} />
+                      {property.bedroom}
                     </span>
+
                     <span className={styles.metaItem}>
-                      🛁 {property.Bathroom}
+                      <img src={bath} alt="bathroom" className={styles.icons} />
+                      {property.Bathroom}
                     </span>
-                    <span className={styles.metaItem}>📐 {property.Size}</span>
+
+                    <span className={styles.metaItem}>
+                      <img src={house} alt="size" className={styles.icons} />
+                      {property.Size}
+                    </span>
                   </div>
 
                   <button

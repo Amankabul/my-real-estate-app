@@ -3,25 +3,63 @@ import styles from "../styles/ScheduleViewingModal.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import profile from "../images/profile.jpg";
 import logo from "../images/new-logo.png";
+
 export default function ScheduleViewingModal() {
   const { Name } = useParams();
-  const [selectedTime, setSelectedTime] = useState("");
   const navigate = useNavigate();
-  // 👇 reference to overlay so we can force its scroll to top
   const overlayRef = useRef(null);
+
+  const [selectedTime, setSelectedTime] = useState("");
+
+  // ✅ Form state
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    notes: "",
+  });
+
   function handleDirect() {
     navigate(`/`);
   }
+
+  // ✅ Handle typing
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // ✅ Submit form
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+
+    alert("Form submitted, thank you!");
+
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      notes: "",
+    });
+
+    // Reset selected time
+    setSelectedTime("");
+  };
+
   useEffect(() => {
-    // Scroll whole page to top
     window.scrollTo(0, 0);
 
-    // Scroll modal overlay to top
     if (overlayRef.current) {
       overlayRef.current.scrollTop = 0;
     }
-  }, [Name]); // runs when opening a new property modal
+  }, [Name]);
 
   const times = [
     "11:00 AM",
@@ -42,8 +80,9 @@ export default function ScheduleViewingModal() {
         src={logo}
         alt="logo"
         className={styles.logo}
-        onClick={() => handleDirect()}
+        onClick={handleDirect}
       />
+
       <div ref={overlayRef} className={styles.overlay}>
         <div className={styles.modal}>
           <div className={styles.top}>
@@ -56,6 +95,7 @@ export default function ScheduleViewingModal() {
           </div>
 
           <div className={styles.content}>
+            {/* LEFT SIDE */}
             <div className={styles.left}>
               <div className={styles.block}>
                 <p className={styles.blockLabel}>Select a date</p>
@@ -83,13 +123,18 @@ export default function ScheduleViewingModal() {
                 </div>
 
                 <div className={styles.confirmRow}>
-                  <button className={styles.confirmBtn} type="button">
+                  <button
+                    className={styles.confirmBtn}
+                    type="submit"
+                    form="viewingForm"
+                  >
                     Confirm Viewing
                   </button>
                 </div>
               </div>
             </div>
 
+            {/* RIGHT SIDE */}
             <div className={styles.right}>
               <div className={styles.summary}>
                 <p className={styles.smallMuted}>
@@ -98,41 +143,66 @@ export default function ScheduleViewingModal() {
                 <div className={styles.propAddress}>{Name}</div>
               </div>
 
-              <div className={styles.form}>
-                <div className={styles.field}>
-                  <label className={styles.label}>Your Name</label>
-                  <input className={styles.input} placeholder="John Doe" />
-                </div>
+              <form onSubmit={handleSubmitForm} id="viewingForm">
+                <div className={styles.form}>
+                  <div className={styles.field}>
+                    <label className={styles.label}>Your Name</label>
+                    <input
+                      name="name"
+                      className={styles.input}
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
 
-                <div className={styles.field}>
-                  <label className={styles.label}>Email Address</label>
-                  <input
-                    className={styles.input}
-                    placeholder="john.doe@example.com"
-                  />
-                </div>
+                  <div className={styles.field}>
+                    <label className={styles.label}>Email Address</label>
+                    <input
+                      name="email"
+                      type="email"
+                      className={styles.input}
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
 
-                <div className={styles.field}>
-                  <label className={styles.label}>Phone Number</label>
-                  <input
-                    className={styles.input}
-                    placeholder="(123) 456-7890"
-                  />
-                </div>
+                  <div className={styles.field}>
+                    <label className={styles.label}>Phone Number</label>
+                    <input
+                      name="phone"
+                      className={styles.input}
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
 
-                <div className={styles.field}>
-                  <label className={styles.label}>Notes or Questions</label>
-                  <textarea
-                    className={styles.textarea}
-                    placeholder="Optional: e.g., 'I'm interested in the parking situation.'"
-                  />
+                  <div className={styles.field}>
+                    <label className={styles.label}>
+                      Notes or Questions (optional)
+                    </label>
+                    <textarea
+                      name="notes"
+                      className={styles.textarea}
+                      value={formData.notes}
+                      onChange={handleChange}
+                    />
+                  </div>
                 </div>
-              </div>
+              </form>
 
               <div className={styles.agent}>
                 <p className={styles.agentTitle}>Your agent for this viewing</p>
+
                 <div className={styles.agentRow}>
-                  <div className={styles.avatar} />
+                  <img
+                    src={profile}
+                    alt="profile"
+                    style={{ height: "5rem", borderRadius: "100%" }}
+                  />
+
                   <div className={styles.agentInfo}>
                     <div className={styles.agentName}>Jane Doe</div>
                     <div className={styles.agentOrg}>RealtyCo Agents</div>

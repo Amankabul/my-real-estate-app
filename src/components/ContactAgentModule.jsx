@@ -1,20 +1,17 @@
 import { useEffect, useRef } from "react";
 import styles from "../styles/ContactAgentModal.module.css";
+import profile from "../images/profile.jpg";
 
 export default function ContactAgentModal() {
   const overlayRef = useRef(null);
 
   useEffect(() => {
-    // ✅ keep scrollbar (no overflow hidden)
-    // 1) scroll page to top
     window.scrollTo(0, 0);
 
-    // 2) also scroll the overlay container to top (if it has its own scroll)
     if (overlayRef.current) {
       overlayRef.current.scrollTop = 0;
     }
 
-    // 3) ensure it's visible immediately
     overlayRef.current?.focus?.();
   }, []);
 
@@ -31,15 +28,17 @@ export default function ContactAgentModal() {
         <div className={styles.header}>
           <div>
             <h2 className={styles.title}>Contact Agent</h2>
-            <p className={styles.subtitle}>
-              Send a message regarding Modern Brooklyn Loft
-            </p>
+            <p className={styles.subtitle}></p>
           </div>
         </div>
 
         {/* Agent */}
         <div className={styles.agent}>
-          <div className={styles.avatar} />
+          <img
+            src={profile}
+            alt="profile"
+            style={{ height: "5rem", borderRadius: " 100%" }}
+          />
           <div>
             <div className={styles.agentName}>Jane Doe</div>
             <div className={styles.agentOrg}>RealtyCo Agents</div>
@@ -48,31 +47,46 @@ export default function ContactAgentModal() {
 
         <div className={styles.divider} />
 
-        {/* Form */}
         <form className={styles.form}>
           <div className={styles.row}>
             <div className={styles.field}>
               <label className={styles.label}>Name</label>
-              <input className={styles.input} placeholder="Your Name" />
+              <input
+                name="name"
+                className={styles.input}
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
             </div>
 
             <div className={styles.field}>
               <label className={styles.label}>Phone</label>
-              <input className={styles.input} placeholder="Your Phone" />
+              <input
+                name="phone"
+                className={styles.input}
+                value={formData.phone}
+                onChange={handleChange}
+                required
+              />
             </div>
           </div>
 
           <div className={styles.field}>
             <label className={styles.label}>Email</label>
-            <input className={styles.input} placeholder="Your Email" />
+            <input
+              name="email"
+              type="email"
+              className={styles.input}
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
           </div>
 
           <div className={styles.field}>
             <label className={styles.label}>Message</label>
-            <textarea
-              className={styles.textarea}
-              placeholder="I am interested in this property..."
-            />
+            <textarea className={styles.textarea} />
           </div>
 
           <label className={styles.checkbox}>
@@ -83,7 +97,11 @@ export default function ContactAgentModal() {
             </span>
           </label>
 
-          <button type="button" className={styles.submit}>
+          <button
+            type="button"
+            className={styles.submit}
+            onSubmit={handleSubmitForm}
+          >
             Send Message
           </button>
         </form>

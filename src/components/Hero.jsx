@@ -34,7 +34,7 @@ export default function Hero() {
           }
         });
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
     observer.observe(el);
@@ -101,7 +101,7 @@ export default function Hero() {
       return;
     }
 
-    setShowSuggestions(true); // ✅ keep it open while typing
+    setShowSuggestions(true);
 
     if (debounceRef.current) clearTimeout(debounceRef.current);
 
@@ -113,8 +113,6 @@ export default function Hero() {
         // pick table by tab
         const table = activeTab === "Rent" ? "Rent" : "Sell";
 
-        // ✅ SIMPLE + RELIABLE query (only address)
-        // We know you have `address` from your search URLs.
         const { data, error } = await supabase
           .from(table)
           .select("id,address")
@@ -188,6 +186,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       className={`${styles.hero} ${visible ? styles.heroVisible : ""}`}
+      id="hero"
     >
       <nav className={styles.navbar}>
         <div className={styles.logo}>
@@ -266,7 +265,6 @@ export default function Hero() {
                 </span>
               )}
 
-              {/* ✅ Always show dropdown when typing >=2 chars */}
               {showSuggestions && address.trim().length >= 2 && (
                 <div
                   style={{

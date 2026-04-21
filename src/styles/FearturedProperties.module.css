@@ -7,6 +7,10 @@
   max-width: 1200px;
   margin: 0 auto;
 }
+.icons {
+  height: 1.5rem;
+  width: 1.6rem;
+}
 
 /* TITLE + SUBTITLE */
 .topHeader {
@@ -45,7 +49,7 @@
   padding: 0.8rem 0;
   cursor: pointer;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 550;
   color: #6a707a;
   position: relative;
 }
@@ -89,7 +93,9 @@
   border-radius: 1.8rem;
   overflow: hidden;
   box-shadow: 0 14px 35px rgba(0, 0, 0, 0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .card:hover {

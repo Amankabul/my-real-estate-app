@@ -6,7 +6,7 @@ import awardIcon from "../icons/award-solid-full.svg";
 import peopleIcon from "../icons/people-group-solid-full.svg";
 import boltIcon from "../icons/bolt-solid-full.svg";
 import feeIcon from "../icons/floppy-disk-solid-full.svg"; // (you can rename to "tag" later if you want)
-
+import AnchorLink from "react-anchor-link-smooth-scroll";
 const features = [
   {
     id: 1,
@@ -57,7 +57,7 @@ export default function SmartWay() {
           }
         });
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
     observer.observe(el);
@@ -113,9 +113,11 @@ export default function SmartWay() {
               ))}
             </div>
 
-            <button className={styles.ctaBtn} type="button">
-              Browse Listings
-            </button>
+            <AnchorLink href="#featredProperties">
+              <button className={styles.ctaBtn} type="button">
+                Browse Listings
+              </button>
+            </AnchorLink>
           </aside>
         </div>
       </div>

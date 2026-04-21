@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "../styles/HowItWorks.module.css";
-
+// import { useNavigate } from "react-router-dom";
 import iconSearch from "../icons/magnifying-glass-solid-full.svg";
 import iconCalendar from "../icons/calendar-regular-full.svg";
 import iconOffer from "../icons/sheet-plastic-solid-full.svg";
 import iconKey from "../icons/key-solid-full.svg";
-
+import AnchorLink from "react-anchor-link-smooth-scroll";
 const steps = [
   {
     id: 1,
@@ -50,7 +50,7 @@ export default function HowItWorks() {
           }
         });
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
     observer.observe(el);
@@ -93,9 +93,11 @@ export default function HowItWorks() {
 
         {/* CTA */}
         <div className={styles.ctaRow}>
-          <button className={styles.ctaBtn} type="button">
-            Find Your New Home
-          </button>
+          <AnchorLink href="#hero">
+            <button className={styles.ctaBtn} type="button">
+              Find Your New Home
+            </button>
+          </AnchorLink>
         </div>
       </div>
     </section>

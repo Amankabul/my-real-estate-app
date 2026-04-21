@@ -5,22 +5,48 @@ import location from "../icons/location-dot-solid-full.svg";
 import mail from "../icons/envelope-solid-full.svg";
 import logo from "../images/new-logo.png";
 import Footer from "./Footer";
+// import { useState } from "react";
+
+// const [formData, setFormData] = useState({
+//   name: "",
+//   email: "",
+//   subject: "",
+//   notes: "",
+// });
+
+// const handleSubmitForm = (e) => {
+//   e.preventDefault();
+
+//   alert("Form submitted, thank you!");
+
+//   // Reset form
+//   setFormData({
+//     name: "",
+//     email: "",
+//     phone: "",
+//     notes: "",
+//   });
+// };
+// const handleChange = (e) => {
+//   const { name, value } = e.target;
+
+//   setFormData((prev) => ({
+//     ...prev,
+//     [name]: value,
+//   }));
+// };
 export default function ContactPage() {
   return (
     <>
-      {/* ================= HEADER ================= */}
       <header className={styles.header}>
         <div className={styles.headerContainer}>
-          {/* Logo */}
           <div className={styles.logo}>
             <img src={logo} alt="logo" className={styles.logoimage} />
           </div>
         </div>
       </header>
 
-      {/* ================= PAGE ================= */}
       <main className={styles.page}>
-        {/* Hero */}
         <section className={styles.hero}>
           <h1>Contact Our Expert Team</h1>
           <p>
@@ -29,44 +55,57 @@ export default function ContactPage() {
           </p>
         </section>
 
-        {/* Content */}
         <section className={styles.section}>
           <div className={styles.grid}>
-            {/* LEFT */}
             <div className={styles.card}>
               <h2>Send us a Message</h2>
 
-              <div className={styles.form}>
-                <div className={styles.twoCol}>
-                  <div className={styles.field}>
-                    <label>Full Name</label>
-                    <input placeholder="Enter your full name" />
+              <form>
+                <div className={styles.form}>
+                  <div className={styles.twoCol}>
+                    <div className={styles.field}>
+                      <label>Full Name</label>
+                      <input
+                        name="name"
+                        // value={formData.name}
+                        // onChange={handleChange}
+                        required
+                      />
+                    </div>
+
+                    <div className={styles.field}>
+                      <label>Email Address</label>
+                      <input
+                        name="email"
+                        type="email"
+                        // value={formData.email}
+                        // onChange={handleChange}
+                        required
+                      />
+                    </div>
                   </div>
 
                   <div className={styles.field}>
-                    <label>Email Address</label>
-                    <input placeholder="you@example.com" />
+                    <label>Subject</label>
+                    <input />
                   </div>
-                </div>
 
-                <div className={styles.field}>
-                  <label>Subject</label>
-                  <input placeholder="e.g. Property Inquiry" />
-                </div>
+                  <div className={styles.field}>
+                    <label>Your Message</label>
+                    <textarea placeholder="Write your message here..." />
+                  </div>
 
-                <div className={styles.field}>
-                  <label>Your Message</label>
-                  <textarea placeholder="Write your message here..." />
+                  <button className={styles.primaryBtn} type="submit">
+                    Send Message
+                  </button>
                 </div>
-
-                <button className={styles.primaryBtn}>Send Message</button>
-              </div>
+              </form>
             </div>
 
-            {/* RIGHT */}
+            {/* right  */}
             <div className={styles.rightCol}>
               <div className={styles.card}>
-                <h2>Our Office</h2>
+                <h2 className="right-h2">how would you like to contact us</h2>
 
                 <div className={styles.infoRow}>
                   <div className={styles.icon}>
